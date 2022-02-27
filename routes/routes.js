@@ -172,7 +172,7 @@ router.put( "/users/:userId", passport.authenticate( "jwt", { session: false } )
                 } else {                                                                                        // Muussa tapauksessa....
                     await User.findByIdAndUpdate( { _id: id }, req.body, { new: true }, ( err, result ) => {    // Etsitään tietokannasta id:llä käyttäjä ja päivitetään
                         if ( err ) {                                                                            // Jos virhe, niin tulostetaan virheviesti
-                            return res.status( 500 ).json( { message: err.message } );
+                            return res.status( 404 ).json( { message: "UserID not found!" } );
                         } else {
                             res.status( 200 ).json( result )                                                    // Muutoin tulostetaan status 200 ja tulos
                         }
