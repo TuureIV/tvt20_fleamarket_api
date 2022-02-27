@@ -1,10 +1,12 @@
 
 const mongoose = require('mongoose');
-const secrets = require( "../secrets.json" )
+const dotenv = require( 'dotenv' );
+
+dotenv.config();
   
 // tells mongoose to use ES6 implementation of promises
 mongoose.Promise = global.Promise;
-const MONGODB_URI = secrets.mongooseKey;
+const MONGODB_URI = process.env.MOONGOSE_KEY;
 mongoose.connect( MONGODB_URI );
   
 // mongoose.connection

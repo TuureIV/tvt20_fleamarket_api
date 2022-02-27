@@ -1,8 +1,9 @@
 const express = require( "express" );
+const dotenv = require( 'dotenv' );
+dotenv.config();
 const router = express.Router();
 const User = require( "../models/user" );
 const Product = require( "../models/product" );
-const secrets = require( "../secrets.json" );
 const path = require( 'path');
 const bcrypt = require( "bcryptjs" );
 const passport = require( "passport" );
@@ -14,13 +15,14 @@ const JwtStrategy = require('passport-jwt').Strategy,
     ExtractJwt = require('passport-jwt').ExtractJwt;
 let jwtValidationOptions = {}
 jwtValidationOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-jwtValidationOptions.secretOrKey = secrets.jwtSignKey;
+jwtValidationOptions.secretOrKey = process.env.JWT_SIGN_KEY;
 
 const upload = require( "../multer" );
 const cloudinary = require( "../cloudinary" );
 const fs = require( "fs" );
 const multer = require("multer");
 const { MulterError } = require("multer");
+
 
 // Tietoturvallisuus middleware hommia
 const jwtCheck = new JwtStrategy( jwtValidationOptions, async ( jwt_payload, done ) => {    
@@ -66,7 +68,7 @@ router.post( "/login", passport.authenticate( "basic", { session: false } ), asy
     const options = {
         expiresIn: "30min"
     }
-    const token = jwt.sign( payloadData, secrets.jwtSignKey, options )
+    const token = jwt.sign( payloadData, process.env.JWT_SIGN_KEY, options )
     res.status( 200 ).json( { token: token } )
 });
 
