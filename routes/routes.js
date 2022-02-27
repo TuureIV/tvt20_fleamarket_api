@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require( "../models/user" );
 const Product = require( "../models/product" );
 const secrets = require( "../secrets.json" );
+const path = require( 'path');
 const bcrypt = require( "bcryptjs" );
 const passport = require( "passport" );
 const BasicStrategy = require( "passport-http" ).BasicStrategy
@@ -424,6 +425,10 @@ router.post( '/products/:productId/images', passport.authenticate( "jwt", { sess
         return res.status( 404 ).json( { message: "ProductID not found!" } );
     }
 
+});
+
+router.get( "/", ( req, res ) => {
+    res.sendFile( path.join( __dirname, '../ApiDocumentation.html' ) );
 });
 
 
