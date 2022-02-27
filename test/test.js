@@ -83,7 +83,7 @@ const testProduct = {
     category: "anatomia",
     deliveryType: {
         pickup: true,
-        shipment: false,
+        shipping: false,
     },
 }
 

@@ -36,7 +36,7 @@ let schema = new Schema(
         },
         deliveryType: {
             pickup: { type: Boolean, required: true, maxlength: 50 },
-            shipment: { type: Boolean, required: true, maxlength: 50 },
+            shipping: { type: Boolean, required: true, maxlength: 50 },
         }
     }
 );
