@@ -23,7 +23,7 @@ db.on( "error", console.error.bind( console, "MongoDB connection error" ));
 app.use( "/", routes );
 
 // Port the api is listening
-const port = process.env.PORT || 3000;          // Portti 80 kun laitetaan interwebziin
+const port = process.env.PORT || 80;          // Portti 80 kun laitetaan interwebziin
 
 app.listen( port, () => {
     console.log( `Server is running on port ${port}..` );
