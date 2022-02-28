@@ -428,7 +428,7 @@ router.post( '/products/:productId/images', passport.authenticate( "jwt", { sess
             }
         }
     } catch ( err ) {
-        return res.status( 404 ).json( { message: "ProductID not found!" } );
+        return res.status( 404 ).json( { message: err.message } );
     }
 
 });
