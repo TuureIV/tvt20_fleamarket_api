@@ -411,7 +411,11 @@ router.post( '/products/:productId/images', passport.authenticate( "jwt", { sess
                     url = urls[index].url + " " + url;          // yhdeksi merkkijonoksi
                 }
 
-                product.picture = product.picture + " " + url;  // Tallennetaan merkkijono tuotteen sisuksiin
+                if ( product.picture == undefined ) {
+                    product.picture = url;  // Tallennetaan merkkijono tuotteen sisuksiin    
+                } else {
+                    product.picture = product.picture + " " + url + " ";  // Tallennetaan merkkijono tuotteen sisuksiin
+                }                
 
                 // Päivitetään tuote
                 await Product.findByIdAndUpdate( { _id: id }, product, { new: true }, ( err, result ) => {
