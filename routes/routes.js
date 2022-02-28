@@ -411,7 +411,7 @@ router.post( '/products/:productId/images', passport.authenticate( "jwt", { sess
                     url = urls[index].url + " " + url;          // yhdeksi merkkijonoksi
                 }
 
-                if ( ( product.picture ).toString() == "" || product.picture == undefined ) {
+                if ( product.picture == "" || product.picture == undefined ) {
                     product.picture = url;  // Tallennetaan merkkijono tuotteen sisuksiin    
                 } else {
                     product.picture = product.picture + " " + url + " ";  // Tallennetaan merkkijono tuotteen sisuksiin
