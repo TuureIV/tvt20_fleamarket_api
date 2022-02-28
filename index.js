@@ -2,6 +2,8 @@
 const express = require( "express" );
 const bodyParser = require( "body-parser" );
 const app = express();
+
+// .env määrittelyt
 const dotenv = require( 'dotenv' );
 dotenv.config();
 
