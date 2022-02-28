@@ -717,7 +717,7 @@
   }
 };
             defs["PostProduct"] = {
-  "title" : "PostProduct",
+  "title" : "postProduct",
   "type" : "object",
   "properties" : {
     "productName" : {
@@ -735,9 +735,6 @@
     "category" : {
       "type" : "string"
     },
-    "seller" : {
-      "$ref" : "#/components/schemas/PostProduct_seller"
-    },
     "deliveryType" : {
       "$ref" : "#/components/schemas/PostProduct_deliveryType"
     }
@@ -752,21 +749,6 @@
     },
     "shipment" : {
       "type" : "boolean"
-    }
-  },
-  "example" : null
-};
-            defs["PostProduct_seller"] = {
-  "type" : "object",
-  "properties" : {
-    "name" : {
-      "type" : "string"
-    },
-    "email" : {
-      "type" : "string"
-    },
-    "phone" : {
-      "type" : "string"
     }
   },
   "example" : null
@@ -2553,11 +2535,6 @@ public class ProductApiExample {
       "email" : "j@doe.com",
       "phone" : "0505050"
     },
-    "location" : {
-      "city" : "Salt Lake City",
-      "address" : "Long way st",
-      "zip" : "666"
-    },
     "deliveryType" : {
       "pickup" : true,
       "shipment" : false
@@ -2596,11 +2573,6 @@ public class ProductApiExample {
       "email" : "j@doe.com",
       "phone" : "0505050"
     },
-    "location" : {
-      "city" : "Salt Lake City",
-      "address" : "Long way st",
-      "zip" : "666"
-    },
     "deliveryType" : {
       "pickup" : true,
       "shipment" : false
@@ -2636,11 +2608,6 @@ PostProduct *body = {
       "name" : "John",
       "email" : "j@doe.com",
       "phone" : "0505050"
-    },
-    "location" : {
-      "city" : "Salt Lake City",
-      "address" : "Long way st",
-      "zip" : "666"
     },
     "deliveryType" : {
       "pickup" : true,
@@ -2685,11 +2652,6 @@ var opts = {
       "name" : "John",
       "email" : "j@doe.com",
       "phone" : "0505050"
-    },
-    "location" : {
-      "city" : "Salt Lake City",
-      "address" : "Long way st",
-      "zip" : "666"
     },
     "deliveryType" : {
       "pickup" : true,
@@ -2767,11 +2729,6 @@ $body = {
       "email" : "j@doe.com",
       "phone" : "0505050"
     },
-    "location" : {
-      "city" : "Salt Lake City",
-      "address" : "Long way st",
-      "zip" : "666"
-    },
     "deliveryType" : {
       "pickup" : true,
       "shipment" : false
@@ -2830,11 +2787,6 @@ body = {
       "name" : "John",
       "email" : "j@doe.com",
       "phone" : "0505050"
-    },
-    "location" : {
-      "city" : "Salt Lake City",
-      "address" : "Long way st",
-      "zip" : "666"
     },
     "deliveryType" : {
       "pickup" : true,
@@ -2914,11 +2866,6 @@ except ApiException as e:
               "name" : "John",
               "email" : "j@doe.com",
               "phone" : "0505050"
-            },
-            "location" : {
-              "city" : "Salt Lake City",
-              "address" : "Long way st",
-              "zip" : "666"
             },
             "deliveryType" : {
               "pickup" : true,
