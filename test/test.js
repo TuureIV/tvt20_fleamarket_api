@@ -16,17 +16,17 @@ const User = require( '../models/user' );
 chai.use( chaiHttp );
 
 
-before( ( done )  => {
-    Product.deleteMany( {}, function( err ) {} );
-    User.deleteMany( {}, function( err ) {} );
-    done();
-});
+// before( ( done )  => {
+//     Product.deleteMany( {}, function( err ) {} );
+//     User.deleteMany( {}, function( err ) {} );
+//     done();
+// });
 
-after( ( done ) => {
-    Product.deleteMany( {}, function( err ) {} );
-    User.deleteMany( {}, function( err ) {} );
-    done();
-}); 
+// after( ( done ) => {
+//     Product.deleteMany( {}, function( err ) {} );
+//     User.deleteMany( {}, function( err ) {} );
+//     done();
+// }); 
 
 
 const testUser = {
