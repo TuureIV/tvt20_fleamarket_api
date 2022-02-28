@@ -716,9 +716,63 @@
     }
   }
 };
+            defs["PostProduct"] = {
+  "title" : "PostProduct",
+  "type" : "object",
+  "properties" : {
+    "productName" : {
+      "type" : "string"
+    },
+    "description" : {
+      "type" : "string"
+    },
+    "price" : {
+      "type" : "string"
+    },
+    "condition" : {
+      "type" : "string"
+    },
+    "category" : {
+      "type" : "string"
+    },
+    "seller" : {
+      "$ref" : "#/components/schemas/PostProduct_seller"
+    },
+    "deliveryType" : {
+      "$ref" : "#/components/schemas/PostProduct_deliveryType"
+    }
+  },
+  "description" : "Schema for product post"
+};
+            defs["PostProduct_deliveryType"] = {
+  "type" : "object",
+  "properties" : {
+    "pickup" : {
+      "type" : "boolean"
+    },
+    "shipment" : {
+      "type" : "boolean"
+    }
+  },
+  "example" : null
+};
+            defs["PostProduct_seller"] = {
+  "type" : "object",
+  "properties" : {
+    "name" : {
+      "type" : "string"
+    },
+    "email" : {
+      "type" : "string"
+    },
+    "phone" : {
+      "type" : "string"
+    }
+  },
+  "example" : null
+};
             defs["Product"] = {
   "title" : "product",
-  "required" : [ "productName" ],
   "type" : "object",
   "properties" : {
     "_id" : {
@@ -752,7 +806,7 @@
       "$ref" : "#/components/schemas/Product_location"
     },
     "deliveryType" : {
-      "$ref" : "#/components/schemas/Product_deliveryType"
+      "$ref" : "#/components/schemas/PostProduct_deliveryType"
     }
   }
 };
@@ -764,21 +818,35 @@
     }
   }
 };
-            defs["Product_deliveryType"] = {
-  "required" : [ "pickup", "shipment" ],
+            defs["ProductUpdate"] = {
+  "title" : "UpdateProduct",
   "type" : "object",
   "properties" : {
-    "pickup" : {
-      "type" : "boolean"
+    "productName" : {
+      "type" : "string"
     },
-    "shipment" : {
-      "type" : "boolean"
+    "description" : {
+      "type" : "string"
+    },
+    "price" : {
+      "type" : "string"
+    },
+    "condition" : {
+      "type" : "string"
+    },
+    "category" : {
+      "type" : "string"
+    },
+    "creationDate" : {
+      "type" : "string"
+    },
+    "deliveryType" : {
+      "$ref" : "#/components/schemas/PostProduct_deliveryType"
     }
   },
-  "example" : null
+  "description" : "schema for product update"
 };
             defs["Product_location"] = {
-  "required" : [ "city", "zip" ],
   "type" : "object",
   "properties" : {
     "city" : {
@@ -791,7 +859,6 @@
   "example" : null
 };
             defs["Product_seller"] = {
-  "required" : [ "email", "name", "phone" ],
   "type" : "object",
   "properties" : {
     "sellerId" : {
@@ -811,7 +878,6 @@
 };
             defs["User"] = {
   "title" : "user",
-  "required" : [ "address", "email", "fName", "lName", "username" ],
   "type" : "object",
   "properties" : {
     "userId" : {
@@ -835,9 +901,6 @@
     "password" : {
       "type" : "string"
     },
-    "profilePic" : {
-      "type" : "string"
-    },
     "address" : {
       "$ref" : "#/components/schemas/User_address"
     }
@@ -845,8 +908,65 @@
   "description" : "User can buy and sell products",
   "x-tags" : [ "User", "Customer", "Cart", "Address", "Email", "", "Phone", "Name", "Username" ]
 };
+            defs["UserPost"] = {
+  "title" : "userPost",
+  "type" : "object",
+  "properties" : {
+    "fName" : {
+      "type" : "string"
+    },
+    "lName" : {
+      "type" : "string"
+    },
+    "username" : {
+      "type" : "string"
+    },
+    "email" : {
+      "type" : "string"
+    },
+    "phone" : {
+      "type" : "string"
+    },
+    "password" : {
+      "type" : "string"
+    },
+    "address" : {
+      "$ref" : "#/components/schemas/User_address"
+    }
+  },
+  "description" : "schema for user POST",
+  "x-tags" : [ "User", "Customer", "Cart", "Address", "Email", "", "Phone", "Name", "Username" ]
+};
+            defs["UserUpdate"] = {
+  "title" : "userPost",
+  "type" : "object",
+  "properties" : {
+    "fName" : {
+      "type" : "string"
+    },
+    "lName" : {
+      "type" : "string"
+    },
+    "username" : {
+      "type" : "string"
+    },
+    "email" : {
+      "type" : "string"
+    },
+    "phone" : {
+      "type" : "string"
+    },
+    "password" : {
+      "type" : "string"
+    },
+    "address" : {
+      "$ref" : "#/components/schemas/User_address"
+    }
+  },
+  "description" : "schema for user POST",
+  "x-tags" : [ "User", "Customer", "Cart", "Address", "Email", "", "Phone", "Name", "Username" ]
+};
             defs["User_address"] = {
-  "required" : [ "city", "country", "stateProvince", "street", "zipCode" ],
   "type" : "object",
   "properties" : {
     "street" : {
@@ -934,17 +1054,17 @@
               <div class="app-desc">Version: 1.0</div>
             <hr>
             <div>This API provides basic functions for the application to perform requests for user and product. The API is not in use anywhere, and it's made by Arttu Arvelin and Tuure Vairio as an exercise during studies in Spring 2022. To test this API, and its functions, you should try it in this order:
-<p>-Create user<br>
--Login<br>
--Modify user<br>
--Create product<br>
--Modify product<br>
--Add picture<br>
--Search products<br>
--Delete product<br>
--Delete user
-<br></p>
-</div>
+              <p>-Create user<br>
+              -Login<br>
+              -Modify user<br>
+              -Create product<br>
+              -Modify product<br>
+              -Add picture<br>
+              -Search products<br>
+              -Delete product<br>
+              -Delete user
+              <br></p>
+              </div>
           </div>
         </div>
         <div id="sections">
@@ -2420,7 +2540,7 @@ public class ProductApiExample {
 
         ProductApi apiInstance = new ProductApi();
         String userId = userId_example; // String | 
-        Product body = {
+        PostProduct body = {
   "value" : {
     "productName" : "Bottle Caps",
     "description" : "bag ",
@@ -2443,7 +2563,7 @@ public class ProductApiExample {
       "shipment" : false
     }
   }
-}; // Product | Fill the nessesary fields to create a product
+}; // PostProduct | Fill the nessesary fields to create a product
         try {
             Product result = apiInstance.postUsersUserIdProducts(userId, body);
             System.out.println(result);
@@ -2463,7 +2583,7 @@ public class ProductApiExample {
     public static void main(String[] args) {
         ProductApi apiInstance = new ProductApi();
         String userId = userId_example; // String | 
-        Product body = {
+        PostProduct body = {
   "value" : {
     "productName" : "Bottle Caps",
     "description" : "bag ",
@@ -2486,7 +2606,7 @@ public class ProductApiExample {
       "shipment" : false
     }
   }
-}; // Product | Fill the nessesary fields to create a product
+}; // PostProduct | Fill the nessesary fields to create a product
         try {
             Product result = apiInstance.postUsersUserIdProducts(userId, body);
             System.out.println(result);
@@ -2504,7 +2624,7 @@ public class ProductApiExample {
                             <div class="tab-pane" id="examples-Product-postUsersUserIdProducts-0-objc">
                               <pre class="prettyprint"><code class="language-cpp">Configuration *apiConfig = [Configuration sharedConfig];
 String *userId = userId_example; // 
-Product *body = {
+PostProduct *body = {
   "value" : {
     "productName" : "Bottle Caps",
     "description" : "bag ",
@@ -2576,7 +2696,7 @@ var opts = {
       "shipment" : false
     }
   }
-} // {{Product}} Fill the nessesary fields to create a product
+} // {{PostProduct}} Fill the nessesary fields to create a product
 };
 var callback = function(error, data, response) {
   if (error) {
@@ -2609,7 +2729,7 @@ namespace Example
 
             var apiInstance = new ProductApi();
             var userId = userId_example;  // String | 
-            var body = new Product(); // Product | Fill the nessesary fields to create a product (optional) 
+            var body = new PostProduct(); // PostProduct | Fill the nessesary fields to create a product (optional) 
 
             try
             {
@@ -2657,7 +2777,7 @@ $body = {
       "shipment" : false
     }
   }
-}; // Product | Fill the nessesary fields to create a product
+}; // PostProduct | Fill the nessesary fields to create a product
 
 try {
     $result = $api_instance->postUsersUserIdProducts($userId, $body);
@@ -2676,7 +2796,7 @@ use WWW::SwaggerClient::ProductApi;
 
 my $api_instance = WWW::SwaggerClient::ProductApi->new();
 my $userId = userId_example; # String | 
-my $body = WWW::SwaggerClient::Object::Product->new(); # Product | Fill the nessesary fields to create a product
+my $body = WWW::SwaggerClient::Object::PostProduct->new(); # PostProduct | Fill the nessesary fields to create a product
 
 eval { 
     my $result = $api_instance->postUsersUserIdProducts(userId => $userId, body => $body);
@@ -2721,7 +2841,7 @@ body = {
       "shipment" : false
     }
   }
-} # Product | Fill the nessesary fields to create a product (optional)
+} # PostProduct | Fill the nessesary fields to create a product (optional)
 
 try: 
     # Create Product
@@ -2779,7 +2899,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/Product"
+        "$ref" : "#/components/schemas/PostProduct"
       },
       "examples" : {
         "Add new product" : {
@@ -2988,7 +3108,7 @@ public class ProductApiExample {
         ProductApi apiInstance = new ProductApi();
         String userId = userId_example; // String | 
         String producId = producId_example; // String | 
-        Product body = {
+        ProductUpdate body = {
   "value" : {
     "productName" : "Bottle Caps",
     "description" : "Coca Cola Bottle Caps for collectors",
@@ -2997,7 +3117,7 @@ public class ProductApiExample {
     "picture" : "URL here",
     "category" : "Junk"
   }
-}; // Product | 
+}; // ProductUpdate | 
         try {
             Product result = apiInstance.putUsersUserIdProductsProducId(userId, producId, body);
             System.out.println(result);
@@ -3018,7 +3138,7 @@ public class ProductApiExample {
         ProductApi apiInstance = new ProductApi();
         String userId = userId_example; // String | 
         String producId = producId_example; // String | 
-        Product body = {
+        ProductUpdate body = {
   "value" : {
     "productName" : "Bottle Caps",
     "description" : "Coca Cola Bottle Caps for collectors",
@@ -3027,7 +3147,7 @@ public class ProductApiExample {
     "picture" : "URL here",
     "category" : "Junk"
   }
-}; // Product | 
+}; // ProductUpdate | 
         try {
             Product result = apiInstance.putUsersUserIdProductsProducId(userId, producId, body);
             System.out.println(result);
@@ -3046,7 +3166,7 @@ public class ProductApiExample {
                               <pre class="prettyprint"><code class="language-cpp">Configuration *apiConfig = [Configuration sharedConfig];
 String *userId = userId_example; // 
 String *producId = producId_example; // 
-Product *body = {
+ProductUpdate *body = {
   "value" : {
     "productName" : "Bottle Caps",
     "description" : "Coca Cola Bottle Caps for collectors",
@@ -3092,7 +3212,7 @@ var opts = {
     "picture" : "URL here",
     "category" : "Junk"
   }
-} // {{Product}} 
+} // {{ProductUpdate}} 
 };
 var callback = function(error, data, response) {
   if (error) {
@@ -3126,7 +3246,7 @@ namespace Example
             var apiInstance = new ProductApi();
             var userId = userId_example;  // String | 
             var producId = producId_example;  // String | 
-            var body = new Product(); // Product |  (optional) 
+            var body = new ProductUpdate(); // ProductUpdate |  (optional) 
 
             try
             {
@@ -3161,7 +3281,7 @@ $body = {
     "picture" : "URL here",
     "category" : "Junk"
   }
-}; // Product | 
+}; // ProductUpdate | 
 
 try {
     $result = $api_instance->putUsersUserIdProductsProducId($userId, $producId, $body);
@@ -3181,7 +3301,7 @@ use WWW::SwaggerClient::ProductApi;
 my $api_instance = WWW::SwaggerClient::ProductApi->new();
 my $userId = userId_example; # String | 
 my $producId = producId_example; # String | 
-my $body = WWW::SwaggerClient::Object::Product->new(); # Product | 
+my $body = WWW::SwaggerClient::Object::ProductUpdate->new(); # ProductUpdate | 
 
 eval { 
     my $result = $api_instance->putUsersUserIdProductsProducId(userId => $userId, producId => $producId, body => $body);
@@ -3213,7 +3333,7 @@ body = {
     "picture" : "URL here",
     "category" : "Junk"
   }
-} # Product |  (optional)
+} # ProductUpdate |  (optional)
 
 try: 
     # Update Product information
@@ -3289,7 +3409,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/Product"
+        "$ref" : "#/components/schemas/ProductUpdate"
       },
       "examples" : {
         "J. Doe updates Bottle Caps" : {
@@ -4424,7 +4544,7 @@ public class UserApiExample {
     public static void main(String[] args) {
         
         UserApi apiInstance = new UserApi();
-        User body = {
+        UserPost body = {
   "value" : {
     "fName" : "John",
     "lName" : "Doe",
@@ -4441,7 +4561,7 @@ public class UserApiExample {
       "city" : "Lone Pine"
     }
   }
-}; // User | Fill the nessesary fields to create a user
+}; // UserPost | Fill the nessesary fields to create a user
         try {
             inline_response_201 result = apiInstance.postUsers(body);
             System.out.println(result);
@@ -4460,7 +4580,7 @@ public class UserApiExample {
 
     public static void main(String[] args) {
         UserApi apiInstance = new UserApi();
-        User body = {
+        UserPost body = {
   "value" : {
     "fName" : "John",
     "lName" : "Doe",
@@ -4477,7 +4597,7 @@ public class UserApiExample {
       "city" : "Lone Pine"
     }
   }
-}; // User | Fill the nessesary fields to create a user
+}; // UserPost | Fill the nessesary fields to create a user
         try {
             inline_response_201 result = apiInstance.postUsers(body);
             System.out.println(result);
@@ -4493,7 +4613,7 @@ public class UserApiExample {
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
                             <div class="tab-pane" id="examples-User-postUsers-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">User *body = {
+                              <pre class="prettyprint"><code class="language-cpp">UserPost *body = {
   "value" : {
     "fName" : "John",
     "lName" : "Doe",
@@ -4549,7 +4669,7 @@ var opts = {
       "city" : "Lone Pine"
     }
   }
-} // {{User}} Fill the nessesary fields to create a user
+} // {{UserPost}} Fill the nessesary fields to create a user
 };
 var callback = function(error, data, response) {
   if (error) {
@@ -4580,7 +4700,7 @@ namespace Example
         {
 
             var apiInstance = new UserApi();
-            var body = new User(); // User | Fill the nessesary fields to create a user (optional) 
+            var body = new UserPost(); // UserPost | Fill the nessesary fields to create a user (optional) 
 
             try
             {
@@ -4620,7 +4740,7 @@ $body = {
       "city" : "Lone Pine"
     }
   }
-}; // User | Fill the nessesary fields to create a user
+}; // UserPost | Fill the nessesary fields to create a user
 
 try {
     $result = $api_instance->postUsers($body);
@@ -4637,7 +4757,7 @@ use WWW::SwaggerClient::Configuration;
 use WWW::SwaggerClient::UserApi;
 
 my $api_instance = WWW::SwaggerClient::UserApi->new();
-my $body = WWW::SwaggerClient::Object::User->new(); # User | Fill the nessesary fields to create a user
+my $body = WWW::SwaggerClient::Object::UserPost->new(); # UserPost | Fill the nessesary fields to create a user
 
 eval { 
     my $result = $api_instance->postUsers(body => $body);
@@ -4674,7 +4794,7 @@ body = {
       "city" : "Lone Pine"
     }
   }
-} # User | Fill the nessesary fields to create a user (optional)
+} # UserPost | Fill the nessesary fields to create a user (optional)
 
 try: 
     # Create user
@@ -4706,7 +4826,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/User"
+        "$ref" : "#/components/schemas/UserPost"
       },
       "examples" : {
         "J. Doe creates an account" : {
@@ -4891,7 +5011,7 @@ public class UserApiExample {
 
         UserApi apiInstance = new UserApi();
         String userId = userId_example; // String | 
-        User body = {
+        UserUpdate body = {
   "value" : {
     "fName" : "James",
     "lName" : "Doe",
@@ -4908,7 +5028,7 @@ public class UserApiExample {
       "city" : "Cut Bank"
     }
   }
-}; // User | Use same form as in user creation
+}; // UserUpdate | Use same form as in user creation
         try {
             User result = apiInstance.putUsersUserId(userId, body);
             System.out.println(result);
@@ -4928,7 +5048,7 @@ public class UserApiExample {
     public static void main(String[] args) {
         UserApi apiInstance = new UserApi();
         String userId = userId_example; // String | 
-        User body = {
+        UserUpdate body = {
   "value" : {
     "fName" : "James",
     "lName" : "Doe",
@@ -4945,7 +5065,7 @@ public class UserApiExample {
       "city" : "Cut Bank"
     }
   }
-}; // User | Use same form as in user creation
+}; // UserUpdate | Use same form as in user creation
         try {
             User result = apiInstance.putUsersUserId(userId, body);
             System.out.println(result);
@@ -4963,7 +5083,7 @@ public class UserApiExample {
                             <div class="tab-pane" id="examples-User-putUsersUserId-0-objc">
                               <pre class="prettyprint"><code class="language-cpp">Configuration *apiConfig = [Configuration sharedConfig];
 String *userId = userId_example; // 
-User *body = {
+UserUpdate *body = {
   "value" : {
     "fName" : "James",
     "lName" : "Doe",
@@ -5023,7 +5143,7 @@ var opts = {
       "city" : "Cut Bank"
     }
   }
-} // {{User}} Use same form as in user creation
+} // {{UserUpdate}} Use same form as in user creation
 };
 var callback = function(error, data, response) {
   if (error) {
@@ -5056,7 +5176,7 @@ namespace Example
 
             var apiInstance = new UserApi();
             var userId = userId_example;  // String | 
-            var body = new User(); // User | Use same form as in user creation (optional) 
+            var body = new UserUpdate(); // UserUpdate | Use same form as in user creation (optional) 
 
             try
             {
@@ -5098,7 +5218,7 @@ $body = {
       "city" : "Cut Bank"
     }
   }
-}; // User | Use same form as in user creation
+}; // UserUpdate | Use same form as in user creation
 
 try {
     $result = $api_instance->putUsersUserId($userId, $body);
@@ -5117,7 +5237,7 @@ use WWW::SwaggerClient::UserApi;
 
 my $api_instance = WWW::SwaggerClient::UserApi->new();
 my $userId = userId_example; # String | 
-my $body = WWW::SwaggerClient::Object::User->new(); # User | Use same form as in user creation
+my $body = WWW::SwaggerClient::Object::UserUpdate->new(); # UserUpdate | Use same form as in user creation
 
 eval { 
     my $result = $api_instance->putUsersUserId(userId => $userId, body => $body);
@@ -5156,7 +5276,7 @@ body = {
       "city" : "Cut Bank"
     }
   }
-} # User | Use same form as in user creation (optional)
+} # UserUpdate | Use same form as in user creation (optional)
 
 try: 
     # Update user information
@@ -5214,7 +5334,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/User"
+        "$ref" : "#/components/schemas/UserUpdate"
       },
       "examples" : {
         "J. Doe updating information" : {
